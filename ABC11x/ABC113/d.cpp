@@ -16,14 +16,12 @@ int main() {
   auto lok = [&](int bm, int j) {
     if(j == 1) return false;
     if(!(bm & (1 << (j - 2)))) return false;
-    rep(i, w - 2) if(3 == ((bm >> i) & 3) % 4) return false;
     return true;
   };
   auto rok = [&](int bm, int j) {
     bool res = true;
     if(j == w) return false;
     if(!(bm & (1 << (j - 1)))) return false;
-    rep(i, w - 2) if(3 == ((bm >> i) & 3) % 4) return false;
     return true;
   };
   auto cok = [&](int bm, int j) {
@@ -32,13 +30,16 @@ int main() {
       if(bm & (1 << (j - 2))) return false;
     if(j != w)
       if(bm & (1 << (j - 1))) return false;
-    rep(i, w - 2) if(3 == ((bm >> i) & 3) % 4) return false;
     return true;
   };
 
   for(int i = 1; i <= h; i++) {
     for(int j = 1; j <= w; j++) {
       rep(bm, (1 << (w - 1))) {
+        bool ok = true;
+        rep(k, w - 2) if(3 == ((bm >> k) & 3) % 4) ok =
+          false;
+        if(!ok) continue;
         if(lok(bm, j))
           dp[i][j] = (dp[i][j] + dp[i - 1][j - 1]) % mod;
         if(rok(bm, j))
