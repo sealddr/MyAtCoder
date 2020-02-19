@@ -10,34 +10,26 @@ typedef long long ll;
 
 const ll INF = (ll)(1e18) + 1;
 const int MAXN = 200005;
+
 vector<ll> a(MAXN);
+
 bool f(ll x, ll k) {
   ll sum = 0LL;
   int n = a.size();
   rep(i, n) {
-    if(a[i] < 0) {
-      int ng = -1, ok = n;
-      while(abs(ok - ng) > 1) {
-        int mid = (ng + ok) / 2;
-        if(a[mid] * a[i] < x)
-          ok = mid;
-        else
-          ng = mid;
-      }
-      sum += n - ok;
-    } else {
-      int ok = -1, ng = n;
-      while(abs(ok - ng) > 1) {
-        int mid = (ng + ok) / 2;
-        if(a[mid] * a[i] < x)
-          ok = mid;
-        else
-          ng = mid;
-      }
-      sum += ok + 1;
+    bool sflg = a[i] < 0;
+    int ng = sflg ? -1 : n;
+    int ok = sflg ? n : -1;
+    while(abs(ok - ng) > 1) {
+      int mid = (ng + ok) / 2;
+      if(a[mid] * a[i] < x)
+        ok = mid;
+      else
+        ng = mid;
     }
-    if(a[i] * a[i] < x) sum--;
+    sum += sflg ? n - ok : ok + 1;
   }
+  rep(i, n) if(a[i] * a[i] < x) sum--;
   sum >>= 1;
   return sum < k;
 }
