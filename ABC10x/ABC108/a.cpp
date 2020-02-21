@@ -8,15 +8,11 @@ typedef long long ll;
 #define all(x) (x).begin(), (x).end()
 #define dbg(x) cerr << #x << ": " << x << endl
 int main() {
-  int n, k;
-  cin >> n >> k;
-  ll ans;
-  int a = n / k;
-  ans = (ll)a * a * a;
-  if(k % 2 == 0) {
-    int b = (n * 2) / k - a;
-    ans += (ll)b * b * b;
-  }
-  cout << ans << endl;
+  int k;
+  cin >> k;
+  int no, ne;
+  no = (k + 1) / 2;
+  ne = k / 2;
+  cout << no * ne << endl;
   return 0;
 }
