@@ -28,7 +28,6 @@ int main() {
   string s = "";
   while(n != 0) {
     int r = n % (-2);
-    dbg(r);
     if(r == 0) s = "0" + s, n /= (-2);
     if(r == 1) s = "1" + s, n /= (-2);
     if(r == -1) s = "1" + s, n--, n /= (-2);
