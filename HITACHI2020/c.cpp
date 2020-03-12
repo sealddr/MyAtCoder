@@ -12,8 +12,7 @@ typedef long long ll;
 const int MAX_V = 200000;
 vector<vector<int>> to(MAX_V);
 vector<int> V, W;
-vector<int> col(MAX_V);
-int n;
+
 void dfs(int v, int p, int c) {
   if(c == 0)
     V.push_back(v);
@@ -27,9 +26,9 @@ void dfs(int v, int p, int c) {
 }
 
 int main() {
+  int n;
   cin >> n;
   to.resize(n);
-  col.resize(n);
   rep(i, n - 1) {
     int a, b;
     cin >> a >> b;
@@ -37,14 +36,14 @@ int main() {
     to[a].push_back(b);
     to[b].push_back(a);
   }
+
   dfs(0, -1, 0);
   if(V.size() < W.size()) {
     vector<int> temp = V;
     V = W;
     W = temp;
   }
-  for(auto v : V) dbg(v + 1);
-  for(auto w : W) dbg(w + 1);
+
   vector<int> col(n);
   int c[3] = {3, 1, 2};
   if(W.size() <= n / 3) {
@@ -76,11 +75,11 @@ int main() {
       c[1] += 3;
     }
     if(n % 3 != 0) col[V[iV++]] = c[1];
-
     for(; iV < V.size(); iV++) {
       col[V[iV]] = c[0];
       c[0] += 3;
     }
+
     int iW = 0;
     rep(i, n / 3) {
       col[W[iW++]] = c[2];
@@ -92,6 +91,7 @@ int main() {
       c[0] += 3;
     }
   }
+
   rep(i, n) printf("%d%c", col[i], i == n - 1 ? '\n' : ' ');
   return 0;
 }
