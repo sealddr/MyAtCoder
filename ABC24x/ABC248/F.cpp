@@ -2,28 +2,23 @@
 #include<vector>
 using namespace std;
 typedef long long ll;
+#define rep(i, n) for(int i = 0; i < (n); ++i)
+
+ ll dp[3005][3005][2];
 
 int main(){
-    ll n,p;
+    ll n, p;
     cin >> n >> p;
-    vector<vector<ll>> dpCG(n + 1, vector<ll>(n + 5));
-    vector<vector<ll>> dpIF(n + 1, vector<ll>(n + 5));
-    for(int k = 1; k <= n; k++) for (int i = 0; i < n; i++){
-        dpCG[k][i] = 0LL; dpIF[k][i] = 0LL;
+    rep(i, n) rep(j, n) rep(k, 2) dp[i][j][k] = 0LL;
+    dp[2][1][0] = 1LL; dp[3][1][1] = 1LL;
+    for(int i = 2; i < n + 2; i++) for (int j = 2; j < n + 1; j++){
+        dp[i][j][0] = (dp[i][j][0] + dp[i][j-1][0])            % p;
+        dp[i][j][0] = (dp[i][j][0] + 3 * dp[i - 1][j - 1][0])  % p;
+        dp[i][j][0] = (dp[i][j][0] + dp[i][j-1][1])            % p;
+        dp[i][j][1] = (dp[i][j][1] + dp[i - 1][j - 1][1])      % p;
+        dp[i][j][1] = (dp[i][j][1] + 2 * dp[i - 2][j - 1][0])  % p;
     }
-    dpCG[1][3] = 1LL; dpCG[1][4] = 0LL;
-    dpIF[1][3] = 0LL; dpIF[1][4] = 1LL;
-
-    for(int k = 2; k <= n; k++) for (int i = 3; i < n + 3; i++){
-        dpCG[k][i] = (dpCG[k][i] + dpCG[k - 1][i]) % p;
-        dpCG[k][i] = (dpCG[k][i] + 3 * dpCG[k - 1][i - 1]) % p;
-        dpCG[k][i] = (dpCG[k][i] + dpIF[k - 1][i]) % p;
-
-        dpIF[k][i] = (dpIF[k][i] + dpIF[k - 1][i - 1]) % p;
-        dpIF[k][i] = (dpIF[k][i] + 2 * dpCG[k - 1][i - 2]) % p;
-    }
-
-
-    for (int i = 4; i < n + 3; i++) cout << dpCG[n][i] << " ";
+    for (int i = 3; i < n + 2; i++) cout << dp[i][n][0] << " ";
     cout << endl;
+    return 0;
 }
