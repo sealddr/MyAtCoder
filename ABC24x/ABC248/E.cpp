@@ -64,28 +64,10 @@ int main(){
             if(t == 0 && dx == 0 && x[i] == s) (lines[j].second)++;
             else if(t == 0 && dy == 0 && y[i] == s) (lines[j].second)++;
             else if(t != 0 && dx * t * y[i] == dy * t * x[i] + dx * s) (lines[j].second)++;
-//            cout << "x[i] y[i]: " << x[i] << " " << y[i] <<endl; 
-//            cout << "dx dy s t: " << dx << " " << dy << " " << s << " " << t << " cnt: "; 
-//            cout << lines[j].second << endl;
     }
     int ans = 0;
     rep(j, sz) if(lines[j].second >= k) ans++;
 
-    /** for debug
-    rep(j, sz) {
-            pair<P,P> line = lines[j].first;
-            P sl, it;
-            sl = line.first; it = line.second;
-            ll dx, dy;
-            dx = sl.first; dy = sl.second;
-            ll s, t;
-            s = it.first; t = it.second;
-            if (lines[j].second >=k){
-            cout << "j dx dy s t: " << j << " " << dx << " " << dy << " " << s << " " << t << " cnt: "; 
-            cout << lines[j].second << endl;
-            }
-    }
-    */
     cout << ans << endl;
 
 }
