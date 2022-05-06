@@ -36,13 +36,13 @@ BreakBeforeInheritanceComma: true
 BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: BeforeComma
 BreakStringLiterals: true
-ColumnLimit: 60
+ColumnLimit: 100
 CompactNamespaces: false
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ReflowComments: true
 
 # インデントに関する設定
-TabWidth: 2
+TabWidth: 4
 AccessModifierOffset: -2
 AlignAfterOpenBracket: Align
 ConstructorInitializerIndentWidth: 2
@@ -50,7 +50,7 @@ ContinuationIndentWidth: 2
 IndentCaseLabels: true
 # Clang 6 で追加
 # IndentPPDirectives: None
-IndentWidth: 2
+IndentWidth: 4
 IndentWrappedFunctionNames: false
 NamespaceIndentation: None
 
