@@ -14,7 +14,7 @@ int main() {
     ll ans = 0;
     for(ll i = k; i <= n + 1; i++)
         ans =
-          (ans + (sum(n - i + 1, n) + 1) - sum(0, i - 1))
+          (ans + (sum(n - i + 1, n) - sum(0, i - 1)) + 1)
           % mod;
     cout << ans << endl;
 }
