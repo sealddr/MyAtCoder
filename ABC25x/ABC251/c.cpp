@@ -15,27 +15,19 @@ bool chmax(T& a, const T& b) {
 int main() {
     int n;
     cin >> n;
-    unordered_map<string, int> mpi;
-    vector<pair<int, int>> score(n);
-    rep(i, n) score[i] = make_pair(-1, i + 1);
-    int mx = -1;
+    unordered_map<string, bool> mpi;
+    int mxt = -1;
+    int mxi;
     rep(i, n) {
         string s;
         int t;
         cin >> s >> t;
-        if(mpi.count(s))
-            continue;
-        else {
-            score[i].first = t;
-            mpi[s] = i;
-            chmax(mx, t);
-        }
+        if(mpi.count(s)) continue;
+        mpi[s]=true;
+        if(mxt < t){
+                mxt = t;
+                mxi = i + 1;                
+         }
     }
-    sort(score.begin(), score.end());
-    rep(i, n) {
-        if(mx == score[i].first) {
-            cout << score[i].second << endl;
-            return 0;
-        }
-    }
+    cout << mxi << endl;
 }
