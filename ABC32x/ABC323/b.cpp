@@ -24,10 +24,17 @@ int main(){
         cin >> s;
         int wins;
         wins =countwins(s);
-        match_results.push_back(make_pair(wins, n - i));
+        match_results.push_back(make_pair(wins, i + 1));
     }
 
-    sort(all(match_results), greater<MatchResult>());
-    
-    rep(i, n) cout << n + 1 - match_results[i].second << endl;
+    sort(all(match_results), [](const MatchResult& a, const MatchResult& b) {
+        if (a.first != b.first) {
+            return a.first > b.first;
+        } else {
+            return a.second < b.second;
+        }
+    });
+       
+    rep(i, n - 1) cout << match_results[i].second << " ";
+    cout << match_results[n - 1].second << endl;
 }
